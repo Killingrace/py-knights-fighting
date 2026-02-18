@@ -15,13 +15,11 @@ class Action:
 
     @staticmethod
     def apply_armour(knights_list: list[Knight]) -> None:
-        calculated_knights_list = []
         for knight in knights_list:
             final_protection = 0
             for part in knight.armour:
                 final_protection += part.protection
             knight.protection = final_protection
-            calculated_knights_list.append(knight)
 
     @staticmethod
     def apply_potion(knights_list: list[Knight]) -> None:

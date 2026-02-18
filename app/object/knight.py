@@ -5,8 +5,6 @@ from app.object.weapon import Weapon
 
 
 class Knight:
-    protection = 0
-
     def __init__(self,
                  name: str,
                  hp: int,
@@ -20,13 +18,14 @@ class Knight:
         self.armour = armour
         self.potion = potion
         self.weapon = weapon
+        self.protection = 0
 
     def __repr__(self) -> str:
         return f"""
 \n<
     Knight Name: {self.name}
     Knight HP: {self.hp}
-    Knigh Protection: {self.protection}
+    Knight Protection: {self.protection}
     Knight Power: {self.power}
     Knight Armour: {self.armour}
     Knight Potion: {self.potion}

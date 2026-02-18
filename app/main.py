@@ -95,10 +95,9 @@ def battle(knights: dict) -> dict:
     Action.apply_potion(list_of_knights)
     Action.apply_weapon(list_of_knights)
     for i in range(len(list_of_knights))[:2]:
-        print(f"{list_of_knights[i].name} vs {list_of_knights[i + 2].name}")
         Action.knight_fight(list_of_knights[i], list_of_knights[i + 2])
     return {knight.name: knight.hp for knight in list_of_knights}
 
 
 if __name__ == "__main__":
-    print(battle(KNIGHTS))
+    battle(KNIGHTS)

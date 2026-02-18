@@ -1,9 +1,8 @@
 class Potion:
 
-    def __init__(self, potion_name: str, effect: dict) -> None:
-        self.potion_name = potion_name
+    def __init__(self, name: str, effect: dict) -> None:
+        self.name = name
         self.effect = effect
 
     def __repr__(self) -> str:
-        return f"<Potion name: {self.potion_name},\
-             Potion effect: {self.effect}>"
+        return f"<Potion name: {self.name}, Potion effect: {self.effect}>"
