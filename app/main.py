@@ -1,103 +1,40 @@
-from app.action.action import Action
-
-
-KNIGHTS = {
-    "lancelot": {
-        "name": "Lancelot",
-        "power": 35,
-        "hp": 100,
-        "armour": [],
-        "weapon": {
-            "name": "Metal Sword",
-            "power": 50,
-        },
-        "potion": None,
-    },
-    "arthur": {
-        "name": "Arthur",
-        "power": 45,
-        "hp": 75,
-        "armour": [
-            {
-                "part": "helmet",
-                "protection": 15,
-            },
-            {
-                "part": "breastplate",
-                "protection": 20,
-            },
-            {
-                "part": "boots",
-                "protection": 10,
-            }
-        ],
-        "weapon": {
-            "name": "Two-handed Sword",
-            "power": 55,
-        },
-        "potion": None,
-    },
-    "mordred": {
-        "name": "Mordred",
-        "power": 30,
-        "hp": 90,
-        "armour": [
-            {
-                "part": "breastplate",
-                "protection": 15,
-            },
-            {
-                "part": "boots",
-                "protection": 10,
-            }
-        ],
-        "weapon": {
-            "name": "Poisoned Sword",
-            "power": 60,
-        },
-        "potion": {
-            "name": "Berserk",
-            "effect": {
-                "power": +15,
-                "hp": -5,
-                "protection": +10,
-            }
-        }
-    },
-    "red_knight": {
-        "name": "Red Knight",
-        "power": 40,
-        "hp": 70,
-        "armour": [
-            {
-                "part": "breastplate",
-                "protection": 25,
-            }
-        ],
-        "weapon": {
-            "name": "Sword",
-            "power": 45
-        },
-        "potion": {
-            "name": "Blessing",
-            "effect": {
-                "hp": +10,
-                "power": +5,
-            }
-        }
-    }
-}
+from action.action import Action
+from data.custom_data import KNIGHTS
 
 
 def battle(knights: dict) -> dict:
+
     list_of_knights = Action.create_knight(knights)
+
     Action.apply_armour(list_of_knights)
     Action.apply_potion(list_of_knights)
     Action.apply_weapon(list_of_knights)
-    for i in range(len(list_of_knights))[:2]:
-        Action.knight_fight(list_of_knights[i], list_of_knights[i + 2])
-    return {knight.name: knight.hp for knight in list_of_knights}
+
+    max = len(list_of_knights)
+    full = max - (max % 4)
+    chunk = list(range(full, max))
+
+    for i in range(0, full, 4):
+        for j in range(i, i + 2, 1):
+            print(f"{j} vs {j + 2}")
+            Action.knight_fight(list_of_knights[j], list_of_knights[j + 2])
+
+
+    if chunk:
+        if len(chunk) == 3:
+            print(f"{chunk[0]} vs {chunk[2]}")
+            Action.knight_fight(list_of_knights[chunk[0]], list_of_knights[chunk[2]])
+            print(f"Knight {list_of_knights[chunk[1]].name}: {chunk[1]} dont have an opponent")
+        elif len(chunk) == 2:
+            print(f"{chunk[0]} vs {chunk[1]}")
+            Action.knight_fight(list_of_knights[chunk[0]], list_of_knights[chunk[1]])
+        else:
+            print(f"Knight {list_of_knights[chunk[0]].name}: {chunk[0]} dont have an opponent")
+
+    return {
+        knight.name: knight.hp for knight in list_of_knights
+    }
 
 
 if __name__ == "__main__":
-    battle(KNIGHTS)
+    print(battle(KNIGHTS))

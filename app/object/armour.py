@@ -5,5 +5,5 @@ class Armour:
         self.protection = protection
 
     def __repr__(self) -> str:
-        return f"<Piece name: {self.name} \
-        Piece protection: {self.protection}>"
+        return f"<Piece name: {self.name}, \
+Piece protection: {self.protection}>"

@@ -1,7 +1,6 @@
-
-from app.object.armour import Armour
-from app.object.potion import Potion
-from app.object.weapon import Weapon
+from object.armour import Armour
+from object.potion import Potion
+from object.weapon import Weapon
 
 
 class Knight:
